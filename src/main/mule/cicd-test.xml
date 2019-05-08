@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="cicd-testFlow" doc:id="0467592e-e7f2-4ed2-a5a7-1544932b3ddd" >
+		<http:listener doc:name="Listener" doc:id="562abea1-847b-450d-a5ff-650bb025c196" config-ref="api-proxy-listener-http" path="/cicd-test"/>
+		<ee:transform doc:name="Transform Message" doc:id="aa9535c7-7fc2-425c-89db-5ab65367a50a" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : "cicd test succesfull " ++ now() as String {format:"yyyy-MM-dd'T'HH:mm:ss.SSS"}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
