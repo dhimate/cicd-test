@@ -1,8 +1,11 @@
 pipeline {
-    agent {
-        any {
+    agent any
+    /* {
+        docker {
+            image 'maven:3.6.1-jdk-8-alpine' 
+            args '-v /root/.m2:/root/.m2' 
         }
-    }
+    }*/
     
     stages {
         stage('Preparation') { // for display purposes
@@ -16,16 +19,19 @@ pipeline {
         stage('Build') {
           // Run the maven build
             steps {
-                sh "'mvn' -Dmaven.test.failure.ignore clean package"
+                configFileProvider([configFile(fileId: 'my_settings', variable: 'SETTINGS')]) {
+                    sh "'mvn' -s $SETTINGS -Dmaven.test.failure.ignore clean package"
+                }
             }
         }
    
        stage('Deploy') {
           // Deploy the maven build
             steps {
-                sh "'mvn' deploy -DmuleDeploy -Dtarget=${MULE_SANDBOX_TARGET} -Dtarget.type=${MULE_SANDBOX_TARGET_TYPE} -Dusername=${MULE_USERNAME} -Dpassword=${MULE_PASSWORD} -Denvironment=${MULE_SANDBOX_ENVIRONMENT} "
+                configFileProvider([configFile(fileId: 'my_settings', variable: 'SETTINGS')]) {
+                    sh "'mvn' -s $SETTINGS deploy -DmuleDeploy -Dtarget=${TARGET} -Dtarget.type=${TARGET_TYPE} -Dusername=${USERNAME} -Dpassword=${PASSWORD} -Denvironment=${ENVIRONMENT} "
+                }
             }
         }
     } 
 }
-
