@@ -32,7 +32,7 @@
 						<username>${username}</username>
 						<password>${password}</password>
 						<environment>${environment}</environment>
-						<businessGroup>Yogesh Dhimate</businessGroup>
+						<businessGroup>ALIP Client A</businessGroup>
 					</armDeployment>
 				<sharedLibraries>
                         <sharedLibrary>
