@@ -12,11 +12,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<app.runtime>4.2.0</app.runtime>
-		<mule.version>4.2</mule.version>
+		<mule.version>4.2.0</mule.version>
 		<mule.maven.plugin.version>3.2.7</mule.maven.plugin.version>
+		<cloudhub.application.name>dhimate-cicd-test</cloudhub.application.name>
 		<munit.version>2.1.5</munit.version>
 	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -25,21 +25,22 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<armDeployment>
+					<!-- <armDeployment> <uri>https://anypoint.mulesoft.com</uri> <muleVersion>${mule.version}</muleVersion> 
+						<target>${target}</target> <targetType>${target.type}</targetType> <username>${username}</username> 
+						<password>${password}</password> <environment>${environment}</environment> 
+						<businessGroup>Yogesh Dhimate</businessGroup> </armDeployment> -->
+					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>${mule.version}</muleVersion>
-						<target>${target}</target>
-						<targetType>${target.type}</targetType>
 						<username>${username}</username>
 						<password>${password}</password>
+						<applicationName>${cloudhub.application.name}</applicationName>
 						<environment>${environment}</environment>
+						<workers>1</workers>
+						<workerType>MICRO</workerType>
 						<businessGroup>Yogesh Dhimate</businessGroup>
-					</armDeployment>
+					</cloudHubDeployment>
 					<sharedLibraries>
-						<sharedLibrary>
-							<groupId>mysql</groupId>
-							<artifactId>mysql-connector-java</artifactId>
-						</sharedLibrary>
 					</sharedLibraries>
 				</configuration>
 			</plugin>
@@ -71,30 +72,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.anypoint.mulesoft</groupId>
-			<artifactId>gateway-proxy-domain</artifactId>
-			<version>1.0.0</version>
-			<classifier>mule-domain</classifier>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.mulesoft.connectors</groupId>
-			<artifactId>mule-salesforce-connector</artifactId>
-			<version>9.1.0</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.connectors</groupId>
-			<artifactId>mule-db-connector</artifactId>
-			<version>1.3.1</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.44</version>
-		</dependency>
-		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-runner</artifactId>
 			<version>2.1.5</version>
@@ -113,6 +90,12 @@
 			<artifactId>munit-remote</artifactId>
 			<version>${munit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.connectors</groupId>
+			<artifactId>mule-http-connector</artifactId>
+			<version>1.5.4</version>
+			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
 

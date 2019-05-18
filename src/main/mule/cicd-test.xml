@@ -7,8 +7,11 @@
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ebc9e14d-5033-44fe-bf6c-f81a43cb8633" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
 	<flow name="cicd-testFlow" doc:id="0467592e-e7f2-4ed2-a5a7-1544932b3ddd" >
-		<http:listener doc:name="Listener" doc:id="562abea1-847b-450d-a5ff-650bb025c196" config-ref="api-proxy-listener-http" path="/cicd-test"/>
+		<http:listener doc:name="Listener" doc:id="562abea1-847b-450d-a5ff-650bb025c196" config-ref="HTTP_Listener_config" path="/cicd-test"/>
 		<ee:transform doc:name="Transform Message" doc:id="aa9535c7-7fc2-425c-89db-5ab65367a50a" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -19,6 +22,5 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="8d671108-0844-41bf-b511-1ec35aec0a8b" />
 	</flow>
 </mule>
