@@ -11,8 +11,8 @@ pipeline {
         stage('Preparation') { // for display purposes
         // Get some code from a GitHub repository
             steps {
-              git 'https://github.com/dhimate/gateway-proxy-domain.git'
-        	  sh "'mvn' -Dmaven.test.failure.ignore clean package install"
+              //git 'https://github.com/dhimate/gateway-proxy-domain.git'
+        	      //sh "'mvn' -Dmaven.test.failure.ignore clean package install"
               git (
                   url: 'https://github.com/dhimate/cicd-test.git',
                   credentialsId: 'github_id'
@@ -22,7 +22,7 @@ pipeline {
               sh 'git checkout .'
             }
         }
-        stage('Build') {
+ /*       stage('Build') {
           // Run the maven build
             steps {
                 configFileProvider([configFile(fileId: 'my_settings', variable: 'SETTINGS')]) {
@@ -30,12 +30,12 @@ pipeline {
                 }
             }
         }
-   
+*/  
        stage('Deploy') {
           // Deploy the maven build
             steps {
                 configFileProvider([configFile(fileId: 'my_settings', variable: 'SETTINGS')]) {
-                    sh "'mvn' -s $SETTINGS deploy -DskipMunitTests -DmuleDeploy -Dtarget=${TARGET} -Dtarget.type=${TARGET_TYPE} -Dusername=${USERNAME} -Dpassword=${PASSWORD} -Denvironment=${ENVIRONMENT} "
+                    sh "'mvn' -s $SETTINGS clean package deploy -DmuleDeploy -Dtarget=${TARGET} -Dtarget.type=${TARGET_TYPE} -Dusername=${USERNAME} -Dpassword=${PASSWORD} -Denvironment=${ENVIRONMENT} "
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
         stage('Results') {
             steps {
                 junit '**/target/surefire-reports/TEST-*.xml'
-                archiveArtifacts 'target/*.jar'
+                //archiveArtifacts 'target/*.jar'
             }
         }
     } 
