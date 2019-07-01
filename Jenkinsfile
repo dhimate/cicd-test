@@ -3,7 +3,6 @@ pipeline {
     {
         docker {
             image 'maven:3.6.1-jdk-8-alpine' 
-            args '-v /root/.m2:/root/.m2' 
         }
     }
     
