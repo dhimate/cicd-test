@@ -19,14 +19,12 @@
 		<http:listener doc:name="Listener" doc:id="562abea1-847b-450d-a5ff-650bb025c196" config-ref="HTTP_Listener_config" path="/cicd-test"/>
 		<ee:transform doc:name="Transform Message" doc:id="aa9535c7-7fc2-425c-89db-5ab65367a50a" >
 			<ee:message >
-				<ee:set-payload >
-					<![CDATA[
-						%dw 2.0
-						output application/json
-						---
-						{
-							"message" : 	"cicd test succesful $(server.host)"
-						}
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : 	"cicd test successful $(server.host default '')"
+}
 					]]>
 				</ee:set-payload>
 			</ee:message>
