@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: DownloadSecureFile
+- task: DownloadSecureFile@1
   name: mySettings
   displayName: 'Download settings.xml'
   inputs:
