@@ -16,8 +16,8 @@ steps:
   inputs:
     secureFile: 'settings.xml'
 
-- script:
-    sudo cp "$(mySettings.secureFilePath)"" "${HOME}/.m2/settings.xml"
+#- script:
+#    sudo cp "$(mySettings.secureFilePath)"" "${HOME}/.m2/settings.xml"
 
 
 - task: Maven@3
