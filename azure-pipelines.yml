@@ -10,6 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: DownloadSecureFile
+  name: mySettings
+  displayName: 'Download settings.xml'
+  inputs:
+    secureFile: 'settings.xml'
+
+- script:
+    sudo cp "$(mySettings.secureFilePath)"" "${HOME}/.m2/settings.xml"
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
