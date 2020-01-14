@@ -18,6 +18,8 @@ steps:
 
 - script:
     sudo cp "$(mySettings.secureFilePath)"" "${HOME}/.m2/settings.xml"
+
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
