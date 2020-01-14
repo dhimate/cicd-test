@@ -29,4 +29,5 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    options: '-B -e -s $(Agent.TempDirectory)/settings.xml'
     goals: 'package'
