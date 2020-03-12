@@ -17,6 +17,5 @@ steps:
     secureFile: 'settings.xml'
 
 
-- script: echo Hello; 
-  echo variables
+- script: echo variables
   
