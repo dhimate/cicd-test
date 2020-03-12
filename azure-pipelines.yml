@@ -16,6 +16,5 @@ steps:
   inputs:
     secureFile: 'settings.xml'
 
-
-- script: echo variables
+- bash: echo $(Build.SourceBranchName)
   
