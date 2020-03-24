@@ -11,8 +11,8 @@ pool:
 
 variables:
   - group: MuleSoft
-  - name: bronze_var
-    value: $[if(variables['Build.SourceBranchName'], 'master', $(bronze_key))]
+  - template: vars.yml
+
 
 
 steps:
@@ -22,5 +22,5 @@ steps:
   inputs:
     secureFile: 'settings.xml'
 
-- bash: echo $(bronze_var)
+- bash: echo ${{ variables.favoriteVeggie }}
   
