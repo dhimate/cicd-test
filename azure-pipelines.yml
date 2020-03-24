@@ -12,7 +12,7 @@ pool:
 variables:
   - group: MuleSoft
   - name: bronze_var
-    value: $(bronze_key)
+    value: $[if(variables['Build.SourceBranchName'], 'master', $(bronze_key))]
 
 
 steps:
