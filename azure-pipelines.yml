@@ -9,6 +9,12 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: MuleSoft
+  - name: bronze_var
+    value: $(bronze_key)
+
+
 steps:
 - task: DownloadSecureFile@1
   name: mySettings
@@ -16,5 +22,5 @@ steps:
   inputs:
     secureFile: 'settings.xml'
 
-- bash: echo $(Build.SourceBranchName)
+- bash: echo $(bronze_var)
   
