@@ -11,11 +11,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<app.runtime>4.2.0</app.runtime>
-		<mule.version>4.2.0</mule.version>
-		<mule.maven.plugin.version>3.2.7</mule.maven.plugin.version>
+		<app.runtime>4.2.2</app.runtime>
+		<mule.version>4.2.2</mule.version>
+		<mule.maven.plugin.version>3.4.0</mule.maven.plugin.version>
 		<cloudhub.application.name>dhimate-cicd-test</cloudhub.application.name>
-		<munit.version>2.1.5</munit.version>
+		<munit.version>2.2.4</munit.version>
 	</properties>
 	<build>
 		<plugins>
@@ -30,15 +30,15 @@
 						<password>${password}</password> <environment>${environment}</environment> 
 						<businessGroup>Yogesh Dhimate</businessGroup> </armDeployment> -->
 					<cloudHubDeployment>
+						<server>anypoint</server>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>${mule.version}</muleVersion>
-						<username>${username}</username>
-						<password>${password}</password>
 						<applicationName>${cloudhub.application.name}</applicationName>
-						<environment>${environment}</environment>
+						<environment>Development</environment>
 						<workers>1</workers>
 						<workerType>MICRO</workerType>
 						<businessGroup>Yogesh Dhimate</businessGroup>
+						<applyLatestRuntimePatch>true</applyLatestRuntimePatch>
 					</cloudHubDeployment>
 					<sharedLibraries>
 					</sharedLibraries>
@@ -74,14 +74,14 @@
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-runner</artifactId>
-			<version>2.1.5</version>
+			<version>2.2.4</version>
 			<classifier>mule-plugin</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-tools</artifactId>
-			<version>2.1.5</version>
+			<version>2.2.4</version>
 			<classifier>mule-plugin</classifier>
 			<scope>test</scope>
 		</dependency>
@@ -94,7 +94,7 @@
 		<dependency>
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-http-connector</artifactId>
-			<version>1.5.4</version>
+			<version>1.5.17</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
