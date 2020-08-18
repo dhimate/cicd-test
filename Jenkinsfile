@@ -29,7 +29,8 @@ pipeline {
           // Deploy the maven build
             steps {
                 configFileProvider([configFile(fileId: 'my_settings', variable: 'SETTINGS')]) {
-                    sh "'mvn' -s $SETTINGS clean package deploy -DmuleDeploy -Dtarget=${TARGET} -Dtarget.type=${TARGET_TYPE} -Dusername=${USERNAME} -Dpassword=${PASSWORD} -Denvironment=${ENVIRONMENT} "
+                    //sh "'mvn' -s $SETTINGS clean package deploy -DmuleDeploy -Dtarget=${TARGET} -Dtarget.type=${TARGET_TYPE} -Dusername=${USERNAME} -Dpassword=${PASSWORD} -Denvironment=${ENVIRONMENT} "
+                    sh "'mvn' -s $SETTINGS clean package deploy -DmuleDeploy -Dcloudhub.environment=Sandbox"
                 }
             }
         }

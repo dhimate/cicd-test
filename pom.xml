@@ -33,7 +33,7 @@
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>${mule.version}</muleVersion>
 						<applicationName>${cloudhub.application.name}</applicationName>
-						<environment>Sandbox</environment>
+						<environment>${cloudhub.environment}</environment>
 						<workers>1</workers>
 						<workerType>MICRO</workerType>
 						<businessGroup>Business_Group_1</businessGroup>
